@@ -1,4 +1,4 @@
-package om.web;
+package om.api.giphy;
 
 import js.Error;
 import js.html.XMLHttpRequest;
@@ -60,11 +60,13 @@ typedef Item = {
     var images : Images;
     var import_datetime : String;
     var rating : String;
+    var caption : String;
     var source : String;
     var source_post_url : String;
     var source_tld : String;
     var trending_datetime : String;
     var type : String;
+    var slug : String;
     var url : String;
     var user : User;
     var username : String;
@@ -94,9 +96,14 @@ typedef RequestResultSet = {
     var pagination : Pagination;
 }
 
+/**
+    HTTP request wrapper to https://api.giphy.com/
+
+    See: https://github.com/Giphy/GiphyAPI
+*/
 class Giphy {
 
-    public static inline var API_URL = 'http://api.giphy.com/v1/gifs/';
+    public static inline var API_URL = 'http://api.giphy.com/v1/gifs';
 
     public var apiKey : String;
 
@@ -105,36 +112,34 @@ class Giphy {
     }
 
     public function search( q : Array<String>, ?limit : Int, ?offset : Int, ?rating : Rating, callback : Error->RequestResultSet->Void ) {
-
-        var params = 'search?q='+q.join('+');
+        var params = '/search?q='+q.join('+');
         if( limit != null ) params += '&limit=$limit';
         if( offset != null ) params += '&offset=$offset';
         if( rating != null ) params += '&rating=$rating';
-
         request( params, callback );
     }
 
     public function trending( ?limit : Int, ?rating : Rating, callback : Error->RequestResultSet->Void ) {
-
-        var params = 'trending?';
+        var params = '/trending?';
         if( limit != null ) params += '&limit=$limit';
         if( rating != null ) params += '&rating=$rating';
-
         request( params, callback );
     }
 
-    /*
-    public function random( ?tag : String, ?rating : Rating, callback : Error->RequestResult->Void ) {
+    public function get( ids : Array<String>, callback : Error->RequestResult->Void ) {
+        var params = '?ids=';
+        for( id in ids ) params += id;
+        request( params, callback );
+    }
 
-        var params = 'random?';
+    public function random( ?tag : String, ?rating : Rating, callback : Error->RequestResult->Void ) {
+        var params = '/random?';
         if( tag != null ) params += '&tag=$tag';
         if( rating != null ) params += '&rating=$rating';
-
         request( params, callback );
     }
-    */
 
-    function request<T>( params : String, callback : Error->T->Void ) {
+    public function request<T>( params : String, callback : Error->T->Void ) {
         var req = new XMLHttpRequest();
         req.open( 'GET', '$API_URL$params&api_key=$apiKey', true );
         req.onerror = function(e) callback( e, null );
