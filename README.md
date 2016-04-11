@@ -1,4 +1,4 @@
 
-# OM|WEB
+# OM|API
 
-Misc web api helper.
+Helpers for 3rd party web apis.
