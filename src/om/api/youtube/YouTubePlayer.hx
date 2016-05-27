@@ -28,7 +28,7 @@ abstract Boolean(Bool) from Bool to Bool {
 }
 
 typedef Options = {
-    var videoId : String;
+    @:optional var videoId : String;
     @:optional var width : String;
     @:optional var height : String;
     @:optional var playerVars : Parameters;
@@ -58,7 +58,6 @@ typedef Parameters = {
     @:optional var showinfo : Int;
     @:optional var start : Int;
 }
-
 
 @:enum abstract PlaybackQuality(String) from String to String {
     var small = 'small';
@@ -91,7 +90,7 @@ typedef Parameters = {
 @:native("YT.Player")
 extern class YouTubePlayer {
 
-    var c(default,never) : Element;
+    //var c(default,never) : Element;
 
     /**
         The first parameter specifies either the DOM element or the id of the HTML element where the API will insert the <iframe> tag containing the player.
@@ -100,20 +99,20 @@ extern class YouTubePlayer {
     function new( id : String, ?params : Options ) : Void;
 
     function loadVideoById( id : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
-    //function cueVideoById
-    //function cueVideoByUrl
-    //function loadVideoByUrl
-    //function cuePlaylist
-    //function loadPlaylist
+    function loadVideoByUrl( mediaContentUrl : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function cueVideoById( id : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function cueVideoByUrl( mediaContentUrl : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function cuePlaylist( playlist : String, index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function loadPlaylist( playlist : String, index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
 
-    function playVideo() : Void;
     function pauseVideo() : Void;
+    function playVideo() : Void;
     function stopVideo() : Void;
-    function clearVideo() : Void;
+    //function clearVideo() : Void;
 
-    //function nextVideo() : Void;
-    //function previousVideo() : Void;
-    //function playVideoAt( index : Int ) : Void;
+    function nextVideo() : Void;
+    function previousVideo() : Void;
+    function playVideoAt( index : Int ) : Void;
 
     function mute() : Void;
     function unMute() : Void;
@@ -122,6 +121,7 @@ extern class YouTubePlayer {
     function getVolume() : Int;
 
     function setSize( width : Int, height : Int ) : Dynamic;
+
     function getPlaybackRate() : Float;
     function setPlaybackRate( suggestedRate : Float ) : Void;
     function getAvailablePlaybackRates() : Array<Float>;
@@ -129,7 +129,6 @@ extern class YouTubePlayer {
     function setShuffle( shufflePlaylist : Bool ) : Void;
 
     function getVideoLoadedFraction() : Float;
-
     function getPlayerState() : Float;
     function getCurrentTime() : Float;
 
@@ -139,6 +138,7 @@ extern class YouTubePlayer {
 
     function getDuration() : Float;
     function getVideoUrl() : String;
+    function getVideoEmbedCode() : String;
     function getPlaylist() : Array<String>;
     function getPlaylistIndex() : Int;
 
@@ -148,8 +148,4 @@ extern class YouTubePlayer {
     function getIframe() : Dynamic;
 
     function destroy() : Void;
-
-    //getOptions
-
-
 }
