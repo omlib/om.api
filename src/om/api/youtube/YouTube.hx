@@ -1,11 +1,17 @@
 package om.api.youtube;
 
+#if js
+
 import js.Browser.document;
 
 /**
     https://developers.google.com/youtube/iframe_api_reference
 */
 class YouTube {
+
+    @:keep
+    @:expose
+    static function __onReady() callback();
 
     static var callback : Void->Void;
 
@@ -26,8 +32,6 @@ class YouTube {
 
     //public static function search() {
 
-    @:keep
-    @:expose
-    static function __onReady() callback();
-
 }
+
+#end

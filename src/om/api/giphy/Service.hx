@@ -1,8 +1,9 @@
 package om.api.giphy;
 
+import haxe.Json;
+
 import js.Error;
 import js.html.XMLHttpRequest;
-import haxe.Json;
 
 typedef RequestResult = {
     var data : SingleImage;
@@ -20,6 +21,7 @@ typedef RequestResultSet = {
 
     See: https://github.com/Giphy/GiphyAPI
 */
+@:require(js)
 class Service {
 
     public static inline var API_URL = 'http://api.giphy.com/v1/gifs';

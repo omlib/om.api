@@ -1,4 +1,4 @@
 
 # OM|API
 
-Helpers for 3rd party web apis.
+Public web apis access helpers.

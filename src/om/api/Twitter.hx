@@ -4,14 +4,16 @@ using StringTools;
 
 class Twitter {
 
-    public static inline var BASE_URL = 'https://twitter.com';
-    public static inline var BASE_TWEET_URL = BASE_URL+'/intent/tweet?';
+    public static inline var URL = 'https://twitter.com';
+    public static inline var TWEET_PATH = 'intent/tweet';
 
     /**
-        Usage example: window.open( Twitter.createTweetURL( 'My text to tweet', 'http://disktree.net' ), '', 'width=618,height=382' );
+        Usage:
+
+        window.open( Twitter.createTweetURL( 'My text to tweet', 'http://disktree.net' ), '', 'width=618,height=382' );
     */
     public static function createTweetURL( ?text : String, ?url : String, ?via : String ) : String {
-        var str = BASE_TWEET_URL;
+        var str = '$URL/$TWEET_PATH?';
         if( text != null ) str += '&text=' + text.urlEncode();
         if( url != null ) str += '&url=' + url.urlEncode();
         if( via != null ) str += '&via=' + via.urlEncode();
