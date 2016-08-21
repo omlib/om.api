@@ -1,6 +1,7 @@
 package om.api.youtube;
 
 import js.html.Element;
+import haxe.extern.EitherType;
 
 /*
 abstract Boolean(Bool) from Bool to Bool {
@@ -102,8 +103,8 @@ extern class YouTubePlayer {
     function loadVideoByUrl( mediaContentUrl : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
     function cueVideoById( id : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
     function cueVideoByUrl( mediaContentUrl : String, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
-    function cuePlaylist( playlist : String, index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
-    function loadPlaylist( playlist : String, index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function cuePlaylist( playlist : EitherType<String,Array<String>>, ?index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
+    function loadPlaylist( playlist : EitherType<String,Array<String>>, ?index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
 
     function pauseVideo() : Void;
     function playVideo() : Void;
