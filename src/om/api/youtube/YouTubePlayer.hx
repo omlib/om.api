@@ -106,9 +106,10 @@ extern class YouTubePlayer {
     function cuePlaylist( playlist : EitherType<String,Array<String>>, ?index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
     function loadPlaylist( playlist : EitherType<String,Array<String>>, ?index : Int, ?startSeconds : Float, ?suggestedQuality : PlaybackQuality ) : Void;
 
-    function pauseVideo() : Void;
     function playVideo() : Void;
+    function pauseVideo() : Void;
     function stopVideo() : Void;
+    function seekTo( seconds : Float, ?allowSeekAhead : Bool ) : Void;
     //function clearVideo() : Void;
 
     function nextVideo() : Void;
@@ -118,7 +119,7 @@ extern class YouTubePlayer {
     function mute() : Void;
     function unMute() : Void;
     function isMuted() : Bool;
-    function setVolume( volume : Int ) : Void;
+    function setVolume( volume : Float ) : Void;
     function getVolume() : Int;
 
     function setSize( width : Int, height : Int ) : Dynamic;
