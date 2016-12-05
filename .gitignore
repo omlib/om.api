@@ -1,3 +1,5 @@
+_*
 doc/
-*.js
-NOTES
+examples/**.js*
+example/**.js*
+test/unit*
