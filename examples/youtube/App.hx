@@ -11,8 +11,7 @@ class App {
 
 		YouTube.init( function(){
 
-			player= new YouTubePlayer( 'videoplayer',
-			{
+			player = new YouTubePlayer( 'videoplayer', {
 				width: window.innerWidth+'px',
 				height: window.innerHeight+'px',
 				videoId: 'eJMQCty6HJM',

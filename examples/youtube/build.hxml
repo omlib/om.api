@@ -1,3 +1,4 @@
 -js app.js
 -main App
--cp ../../src
+-lib om.api
+-debug
