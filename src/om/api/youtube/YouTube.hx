@@ -1,10 +1,10 @@
 package om.api.youtube;
 
-#if js
-
 import js.Browser.document;
 
 /**
+    Utility to initialize the youtube api.
+
     https://developers.google.com/youtube/iframe_api_reference
 */
 class YouTube {
@@ -17,7 +17,7 @@ class YouTube {
 
     public static function init( callback : Void->Void ) {
 
-        YouTube.callback = callback;
+        om.api.youtube.YouTube.callback = callback;
 
         var firstScriptElement = document.getElementsByTagName( 'script' )[0];
 
@@ -25,13 +25,9 @@ class YouTube {
         scriptElement.src = "https://www.youtube.com/iframe_api";
         firstScriptElement.parentNode.insertBefore( scriptElement, firstScriptElement );
 
-        var callbackElement= document.createScriptElement();
-        callbackElement.textContent = 'function onYouTubeIframeAPIReady() { om.api.youtube.YouTube.__onReady(); }';
+        var callbackElement = document.createScriptElement();
+        callbackElement.textContent = 'function onYouTubeIframeAPIReady(){om.api.youtube.YouTube.__onReady();}';
         firstScriptElement.parentNode.insertBefore( callbackElement, firstScriptElement );
     }
 
-    //public static function search() {
-
 }
-
-#end
