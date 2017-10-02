@@ -1,15 +1,17 @@
 package om.api.google;
 
+#if js
 import js.Browser.window;
 import js.Promise;
 import js.html.Response;
+#end
 
-typedef Question = {
+private typedef Question = {
     var name : String;
     var type : Int;
 }
 
-typedef Answer = { > Question,
+private typedef Answer = { > Question,
     var TTL : Int;
     var data : String;
 }
@@ -35,10 +37,14 @@ class DNS {
 
     public static inline var URL = 'https://dns.google.com/resolve';
 
+    #if js
+
     public static function resolve( name : String ) : Promise<Result> {
         return window.fetch( '$URL?name=$name' ).then( function(res:Response) {
             return res.json();
         });
     }
+
+    #end
 
 }
