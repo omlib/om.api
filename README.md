@@ -1,4 +1,4 @@
 
-# OM|API
+# OM.API
 
-Public web apis access helpers.
+> Public web api tools.

@@ -1,5 +1,5 @@
-_*
-doc/
+doc/html/
+doc/xml/
 examples/**.js*
 example/**.js*
-test/unit*
+test/bin/
