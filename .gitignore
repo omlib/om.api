@@ -1,5 +1,4 @@
-doc/html/
-doc/xml/
+doc/
 examples/**.js*
 example/**.js*
 test/bin/
