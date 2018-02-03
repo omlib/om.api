@@ -1,0 +1,20 @@
+--no-output
+-lib om.api
+-dce no
+-D doc-gen
+--each
+
+--next
+-js x
+-xml doc/js.xml
+--macro include("om.api")
+
+--next
+-neko x
+-xml doc/neko.xml
+--macro include("om.api.github",true)
+
+#--next
+#-php x
+#-xml xml/php.xml
+#--macro include("om.api.github",true)
