@@ -10,6 +10,12 @@
 --macro include("om.api")
 
 --next
+-js x
+-xml doc/node.xml
+--macro include("om.api")
+-lib hxnodejs
+
+--next
 -neko x
 -xml doc/neko.xml
 --macro include("om.api.github",true)
