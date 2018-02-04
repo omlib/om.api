@@ -1,5 +1,8 @@
 package om.api.firebase.storage;
 
+#if nodejs
+#elseif js
+
 import om.api.firebase.app.App;
 
 @:native("firebase.storage.Reference")
@@ -19,3 +22,5 @@ extern class Storage {
     function setMaxOperationRetryTime( time : Float ) : Reference;
     function setMaxUploadRetryTime( time : Float ) : Reference;
 }
+
+#end

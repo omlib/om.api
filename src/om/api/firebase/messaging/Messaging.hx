@@ -1,8 +1,11 @@
 package om.api.firebase.messaging;
 
+#if nodejs
+#elseif js
+
 import haxe.Constraints.Function;
 
-typedef ServiceWorkerRegistration = Dynamic;
+import js.html.ServiceWorkerRegistration;
 
 @:jsRequire("firebase.messaging.Messaging")
 extern class Messaging {
@@ -14,3 +17,5 @@ extern class Messaging {
     function setBackgroundMessageHandler( callback : Dynamic->Void ) : Promise<Void>;
     function useServiceWorker( registration : ServiceWorkerRegistration) : Void;
 }
+
+#end
