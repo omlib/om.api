@@ -25,9 +25,9 @@ class YouTube {
         scriptElement.src = "https://www.youtube.com/iframe_api";
         firstScriptElement.parentNode.insertBefore( scriptElement, firstScriptElement );
 
-        var callbackElement = document.createScriptElement();
-        callbackElement.textContent = 'function onYouTubeIframeAPIReady(){om.api.youtube.YouTube.__onReady();}';
-        firstScriptElement.parentNode.insertBefore( callbackElement, firstScriptElement );
+        var cbElement = document.createScriptElement();
+        cbElement.textContent = 'function onYouTubeIframeAPIReady(){om.api.youtube.YouTube.__onReady();}';
+        firstScriptElement.parentNode.insertBefore( cbElement, firstScriptElement );
     }
 
 }
