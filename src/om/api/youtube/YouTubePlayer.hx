@@ -67,7 +67,9 @@ typedef Parameters = {
     @:optional var controls : ShowControls;
 
     /**
-        Setting the parameter's value to 1 causes the player to not respond to keyboard controls. The default value is 0, which means that keyboard controls are enabled. Currently supported keyboard controls are:
+        Setting the parameter's value to 1 causes the player to not respond to keyboard controls.
+        The default value is 0, which means that keyboard controls are enabled.
+        Currently supported keyboard controls are:
             Spacebar or [k]: Play / Pause
             Arrow Left: Jump back 5 seconds in the current video
             Arrow Right: Jump ahead 5 seconds in the current video
@@ -233,7 +235,7 @@ typedef Parameters = {
 */
 
 /**
-    https://developers.google.com/youtube/iframe_api_reference
+    @see: https://developers.google.com/youtube/iframe_api_reference
 */
 @:native("YT.Player")
 extern class YouTubePlayer {
