@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "description": "Public web api access helpers",
     "tags": ["om","api"],
-    "url": "https://github.com/tong/om.api",
+    "url": "https://github.com/omlib/om.api",
     "license": "OM",
     "contributors": ["tong"],
     "releasenote": "See CHANGELOG.md",
