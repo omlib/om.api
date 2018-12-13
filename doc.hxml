@@ -1,26 +1,51 @@
 --no-output
 -lib om.api
+--macro include("om.api")
 -dce no
 -D doc-gen
 --each
 
 --next
+-cpp x
+-xml doc/cpp.xml
+
+--next
+-cs x
+-xml doc/cs.xml
+
+--next
+-hl x
+-xml doc/hl.xml
+
+--next
+--interp
+-xml doc/interp.xml
+
+--next
+-java x
+-xml doc/java.xml
+
+--next
 -js x
 -xml doc/js.xml
---macro include("om.api")
+
+--next
+-lua x
+-xml doc/lua.xml
 
 --next
 -js x
 -xml doc/node.xml
---macro include("om.api")
 -lib hxnodejs
 
 --next
 -neko x
 -xml doc/neko.xml
---macro include("om.api.github",true)
 
-#--next
-#-php x
-#-xml xml/php.xml
-#--macro include("om.api.github",true)
+--next
+-php x
+-xml doc/php.xml
+
+--next
+-python x
+-xml doc/python.xml
