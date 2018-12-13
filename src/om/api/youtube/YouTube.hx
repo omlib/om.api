@@ -1,5 +1,7 @@
 package om.api.youtube;
 
+#if js
+
 import js.Browser.document;
 
 /**
@@ -35,3 +37,5 @@ class YouTube {
     }
 
 }
+
+#end

@@ -1,7 +1,9 @@
 package om.api.youtube;
 
-import js.html.Element;
+#if js
+
 import haxe.extern.EitherType;
+import js.html.Element;
 
 /*
 abstract Boolean(Bool) from Bool to Bool {
@@ -300,3 +302,5 @@ extern class YouTubePlayer {
 
     function destroy() : Void;
 }
+
+#end
