@@ -1,9 +1,16 @@
 package om.api.giphy;
 
-import haxe.Json;
+#if js
 
-import js.Error;
-import js.html.XMLHttpRequest;
+import js.html.URLSearchParams;
+import js.Promise;
+
+enum abstract GIFEndpoint(String) to String {
+    var search;
+    var trending;
+    var translate;
+    var random;
+}
 
 typedef RequestResult = {
     var data : SingleImage;
@@ -19,12 +26,11 @@ typedef RequestResultSet = {
 /**
     Helpers for using the https://api.giphy.com/ service.
 
-    See: https://github.com/Giphy/GiphyAPI
+    @see: https://github.com/Giphy/GiphyAPI
 */
-@:require(js)
 class Service {
 
-    public static inline var API_URL = 'http://api.giphy.com/v1/gifs';
+    public static inline var API_URI = 'http://api.giphy.com/v1/gifs';
 
     public var apiKey : String;
 
@@ -32,39 +38,73 @@ class Service {
         this.apiKey = apiKey;
     }
 
-    public function search( q : Array<String>, ?limit : Int, ?offset : Int, ?rating : Rating, callback : Error->RequestResultSet->Void ) {
-        var params = '/search?q='+q.join('+');
-        if( limit != null ) params += '&limit=$limit';
-        if( offset != null ) params += '&offset=$offset';
-        if( rating != null ) params += '&rating=$rating';
-        request( params, callback );
+    /**
+    **/
+    public function get( id : String ) : Promise<RequestResult> {
+        var params = new URLSearchParams();
+        params.append( 'gif_id', id );
+        return fetch( '', params );
     }
 
-    public function trending( ?limit : Int, ?rating : Rating, callback : Error->RequestResultSet->Void ) {
-        var params = '/trending?';
-        if( limit != null ) params += '&limit=$limit';
-        if( rating != null ) params += '&rating=$rating';
-        request( params, callback );
+    /**
+    **/
+    public function getMany( ids : Array<String> ) : Promise<RequestResult> {
+        var params = new URLSearchParams();
+        params.append( 'ids', ids.join('+') );
+        return fetch( '', params );
     }
 
-    public function get( ids : Array<String>, callback : Error->RequestResult->Void ) {
-        var params = '?ids=';
-        for( id in ids ) params += id;
-        request( params, callback );
+    /**
+        @see https://developers.giphy.com/docs/#search-endpoint
+    **/
+    public function search( q : Array<String>, ?limit : Int, ?offset : Int, ?rating : Rating, ?lang : String ) : Promise<RequestResultSet> {
+        var params = new URLSearchParams();
+        params.append( 'q', q.join('+') );
+        if( limit != null ) params.append( 'limit', Std.string( limit ) );
+        if( offset != null ) params.append( 'offset', Std.string( offset ) );
+        if( rating != null ) params.append( 'rating', rating );
+        if( lang != null ) params.append( 'lang', lang );
+        return fetch( 'search', params );
     }
 
-    public function random( ?tag : String, ?rating : Rating, callback : Error->RequestResult->Void ) {
-        var params = '/random?';
-        if( tag != null ) params += '&tag=$tag';
-        if( rating != null ) params += '&rating=$rating';
-        request( params, callback );
+    /**
+        @see https://developers.giphy.com/docs/#trending-endpoint
+    **/
+    public function trending( ?limit : Int, ?offset : Int, ?rating : Rating ) : Promise<RequestResultSet> {
+        var params = new URLSearchParams();
+        if( limit != null ) params.append( 'limit', Std.string( limit ) );
+        if( offset != null ) params.append( 'offset', Std.string( offset ) );
+        if( rating != null ) params.append( 'rating', rating );
+        return fetch( 'trending', params );
     }
 
-    public function request<T>( params : String, callback : Error->T->Void ) {
-        var req = new XMLHttpRequest();
-        req.open( 'GET', '$API_URL$params&api_key=$apiKey', true );
-        req.onerror = function(e) callback( e, null );
-        req.onload = function(e) callback( null, Json.parse( req.responseText ) );
-        req.send();
+    /**
+        The translate API draws on search, but uses the GIPHY special sauce to handle translating from one vocabulary to another. In this case, words and phrases to GIFs.
+
+        @see https://developers.giphy.com/docs/#translate-endpoint
+    **/
+    public function translate( s : String, ?weirdness : Int ) : Promise<RequestResultSet> {
+        var params = new URLSearchParams();
+        params.append( 's', s );
+        if( weirdness != null ) params.append( 'weirdness', Std.string( weirdness ) );
+        return fetch( 'translate', params );
+    }
+
+    /**
+        https://developers.giphy.com/docs/#random-endpoint
+    **/
+    public function random( ?tag : String, ?rating : Rating ) : Promise<RequestResult> {
+       var params = new URLSearchParams();
+        if( tag != null ) params.append( 'tag', tag );
+        if( rating != null ) params.append( 'rating', rating );
+        return fetch( 'random', params );
+    }
+
+    // TODO: stickers
+
+    function fetch<T>( path : String, params : URLSearchParams ) : Promise<T> {
+        return FetchTools.fetchJson( '$API_URI/$path?'+untyped params.toString()+'&api_key=$apiKey' );
     }
 }
+
+#end

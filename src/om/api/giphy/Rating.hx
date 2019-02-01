@@ -1,6 +1,6 @@
 package om.api.giphy;
 
-@:enum abstract Rating(String) from String to String {
+@:enum abstract Rating(String) to String {
     var y = "y";
     var g = "g";
     var pg = "pg";
