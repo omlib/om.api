@@ -4,7 +4,7 @@
     "description": "Public web api access helpers",
     "tags": ["om","api"],
     "url": "https://github.com/omlib/om.api",
-    "license": "OM",
+    "license": "Public",
     "contributors": ["tong"],
     "releasenote": "See CHANGELOG.md",
     "classPath" : "src/",
