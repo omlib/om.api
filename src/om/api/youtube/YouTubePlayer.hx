@@ -193,7 +193,7 @@ typedef Parameters = {
         If the player is loading a playlist, and you explicitly set the parameter value to 1, then, upon loading, the player will also display thumbnail images for the videos in the playlist.
         Note that this functionality is only supported for the AS3 player.
     */
-    var ?showinfo : Int;
+    @:deprecated var ?showinfo : Int;
 
     /**
         This parameter causes the player to begin playing the video at the given number of seconds from the start of the video.
