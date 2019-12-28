@@ -13,18 +13,18 @@ abstract Boolean(Bool) from Bool to Bool {
 }
 */
 
-enum abstract ProgressbarColor(String) from String to String {
+enum abstract ProgressbarColor(String) to String {
     var red;
     var white;
 }
 
-enum abstract ShowControls(Int) from Int to Int {
+enum abstract ShowControls(Int) to Int {
     var no;
     var def;
     var yes;
 }
 
-enum abstract ListType(String) from String to String {
+enum abstract ListType(String) to String {
     var playlist;
     var search;
     var user_uploads = 'user_uploads';
@@ -221,7 +221,7 @@ enum abstract PlaybackQuality(String) to String {
     var default_ = 'default';
 }
 
-enum abstract PlayerState(Int) from Int to Int {
+enum abstract PlayerState(Int) to Int {
     var unstarted = -1;
     var ended = 0;
     var playing = 1;
@@ -230,7 +230,7 @@ enum abstract PlayerState(Int) from Int to Int {
     var video_cued = 5;
 }
 
-enum abstract PlayerError(Int) from Int to Int {
+enum abstract PlayerError(Int) to Int {
     var invalid_parameter_value = 2;
     var cannot_be_played = 5;
     var not_found = 100;
